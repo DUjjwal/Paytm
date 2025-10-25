@@ -14,11 +14,7 @@ export const auth = async (req, res, next) => {
     if(!user) 
         throw new Error("user not found")
 
-    console.log(user)
-
     req.user = user
-    
-    console.log(req.user)
     
     return next()
 }

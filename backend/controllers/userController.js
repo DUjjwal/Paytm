@@ -5,8 +5,7 @@ import {CustomResponse} from "../util/customResponse.js"
 import mongoose from "mongoose"
 export const getUser = async (req, res, next) => {
     console.log("get user")
-    console.log(req)
-    
+    console.log('red user', req.user)
     return res.send(new CustomResponse(400, "success", req.user, ""))
 }
 

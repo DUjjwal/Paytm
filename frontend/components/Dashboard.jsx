@@ -11,6 +11,8 @@ function Dashboard() {
     const [users, setUsers] = useState([])
     const [from, setFrom] = useState("")
     
+
+    const navigate = useNavigate()
     useEffect(()=> {
         async function Hi()  {
             try {
@@ -27,7 +29,7 @@ function Dashboard() {
                         Authorization: "Bearer "+localStorage.getItem("token")
                     }
                 })
-                console.log(res2.data)
+                console.log("red2-", res2.data.data)
                 setBalance(res2.data.data.account.balance)
 
             }catch(error) {
@@ -42,7 +44,13 @@ function Dashboard() {
     return (
         <div className="w-full h-screen">
             <header className="flex justify-between items-center p-4 border-b-2 border-gray-300">
-                <Heading label="Payments App" size="3xl" />
+                <div className="flex justify-start items-center w-1/2">
+                    <Heading label="Payments App" size="3xl" />
+                    <Button label="Logout" onClick={async () => {
+                        localStorage.removeItem("token")
+                        navigate("/signin")
+                    }}/>
+                </div>
                 <div className="flex items-center gap-4 px-4">
                     <SubHeading label={`Hello, ${user}`} />
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
