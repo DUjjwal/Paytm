@@ -103,7 +103,7 @@ export const loginUser = async (req, res, next) => {
     }
 
     const token = getToken(user)
-    return res.send(new CustomResponse(200, "user login success", {}, ""))
+    return res.send(new CustomResponse(200, "user login success", {user,token}, ""))
     // res.status(200).json({
     //     message: "user login success",
     //     user,

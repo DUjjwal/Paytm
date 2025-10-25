@@ -26,9 +26,10 @@ function Signin() {
                             email,
                             password
                         })
+                        console.log(res.data)
                         if(res.data.status === 200) {
-                            navigate("/dashboard")
                             localStorage.setItem("token", res.data.token)
+                            navigate("/dashboard")                            
                         }
                         else {  
                             toast.error(`${res.data.error}`, {
