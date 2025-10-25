@@ -5,7 +5,10 @@ import dotenv from "dotenv/config"
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: "*", // or specific frontend URL
+  credentials: true,
+}));
 
 connectDB()
 .then(() => {

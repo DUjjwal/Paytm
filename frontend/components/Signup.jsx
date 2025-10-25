@@ -27,7 +27,7 @@ function Signup() {
                 </div>
                 <div className="mx-2 my-5 ">
                     <Button label="Sign Up" onClick={async () => {
-                        const res = await axios.post("http://localhost:4000/user/signup", {
+                        const res = await axios.post(`${import.meta.env.VITE_DB_URL}/user/signup`, {
                             firstname,
                             lastname,
                             email,

@@ -11,14 +11,13 @@ function Transfer() {
     const [searchParams] = useSearchParams()
     //get from and to user using useparama
     
-    const from = searchParams.get("from")
     const to = searchParams.get("to")
     
     const [name, setName] = useState("")
 
     useEffect(() => {
         async function fun() {
-            const res = await axios.get(`http://localhost:4000/user/get/${to}`)
+            const res = await axios.get(`${import.meta.env.VITE_DB_URL}/user/get/${to}`)
             setName(res.data.data.firstname+" "+res.data.data.lastname)
         }
         fun()
@@ -49,14 +48,14 @@ function Transfer() {
                 </div>
                 <div className="mx-2 my-5">
                     <Button label="Initiate Transfer" onClick={async () => {
-                        const res = await axios.post(`http://localhost:4000/account/transfer`,{
+                        const res = await axios.post(`${import.meta.env.VITE_DB_URL}/account/transfer`,{
                             to,
                             amount
                         }, {
                             headers: {
                                 Authorization: "Bearer "+localStorage.getItem("token")
                             }
-                        })
+                        });
                         if(res.data.status === 200) {
                             navigate("/dashboard");
                         }

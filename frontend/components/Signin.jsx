@@ -22,7 +22,7 @@ function Signin() {
                 </div>
                 <div className="mx-2 my-5 ">
                     <Button label="Sign In" onClick={async () => {
-                        const res = await axios.post("http://localhost:4000/user/login", {
+                        const res = await axios.post(`${import.meta.env.VITE_DB_URL}/user/login`, {
                             email,
                             password
                         })

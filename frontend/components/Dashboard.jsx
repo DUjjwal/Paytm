@@ -13,20 +13,25 @@ function Dashboard() {
     
     useEffect(()=> {
         async function Hi()  {
-            const res = await axios.get("http://localhost:4000/user/me", {
-                headers: {
-                    Authorization: "Bearer "+localStorage.getItem("token")
-                }
-            })
-            console.log("asdasd=", res.data.data._id)
-            setFrom(res.data.data._id)
-            setUser(res.data.data.firstname)
-            const res2 = await axios.get("http://localhost:4000/account/me", {
-                headers: {
-                    Authorization: "Bearer "+localStorage.getItem("token")
-                }
-            })
-            setBalance(res2.data.data.account.balance)
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_DB_URL}/user/me`, {
+                    headers: {
+                        Authorization: "Bearer "+localStorage.getItem("token")
+                    }
+                })
+                console.log("asdasd=", res.data.data._id)
+                setFrom(res.data.data._id)
+                setUser(res.data.data.firstname)
+                const res2 = await axios.get(`${import.meta.env.VITE_DB_URL}/account/me`, {
+                    headers: {
+                        Authorization: "Bearer "+localStorage.getItem("token")
+                    }
+                })
+                setBalance(res2.data.data.account.balance)
+
+            }catch(error) {
+                console.log("error occurred", error)
+            }
         }
         Hi()
         
@@ -49,7 +54,7 @@ function Dashboard() {
                 <div className="flex gap-4 m-3">
                     <input className="text-gray-700 w-full outline-1 rounded-lg p-1 outline-gray-200 w-[89%]" type="text" placeholder="Search users..." onChange={(e) => setFilter(e.target.value)} onKeyDown={async (e) => {
                         if(e.key === "Enter") {
-                            const response = await axios.get(`http://localhost:4000/user/search?filter=${filter}`, {
+                            const response = await axios.get(`${import.meta.env.VITE_DB_URL}/user/search?filter=${filter}`, {
                                 headers: {
                                     Authorization: "Bearer "+localStorage.getItem("token")
                                 }
