@@ -26,9 +26,8 @@ function Signin() {
                             email,
                             password
                         })
-                        console.log(res.data)
                         if(res.data.status === 200) {
-                            localStorage.setItem("token", res.data.token)
+                            localStorage.setItem("token", res.data.data.token)
                             navigate("/dashboard")                            
                         }
                         else {  

@@ -27,6 +27,7 @@ function Dashboard() {
                         Authorization: "Bearer "+localStorage.getItem("token")
                     }
                 })
+                console.log(res2.data)
                 setBalance(res2.data.data.account.balance)
 
             }catch(error) {
